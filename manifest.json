@@ -1,0 +1,24 @@
+{
+  "name": "Kabar Liga Bola",
+  "short-name": "Liga Bola",
+  "description": "Kabar Liga Bola merupakan website penyedia informasi seputar sepak bola",
+  "theme_color": "#",
+  "background_color": "#",
+  "display": "standalone",
+  "scope": "/",
+  "start_url": "/index.html",
+  "icons": [
+    {
+      "src": "/img/iconx/maskable_icon-512x512.png",
+      "sizes": "853x853",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/img/iconx/maskable_icon-192x192.png",
+      "sizes": "320x320",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

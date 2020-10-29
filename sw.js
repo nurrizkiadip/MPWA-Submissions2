@@ -19,13 +19,43 @@ const urlsToCache = [
 
 
 self.addEventListener("install", function(e){
-
+  e.waitUntil(
+    caches.open(CACHE_NAME)
+      .then(function(cache){
+        return cache.addAll(urlsToCache);
+      })
+  )
 })
 
 self.addEventListener('active', function(e){
-
+  e.waitUntil(
+    caches.keys()
+      .then(function(cacheNames){
+        return Promise.all(
+          cacheNames.map(function(cacheName){
+            if(cacheName !== CACHE_NAME) return caches.delete(cacheName);
+          })
+        )
+      })
+  )
 })
 
-self.addEventListener('fetch', function(){
+self.addEventListener('fetch', function(e){
+  e.respondWith(
+    caches.open(CACHE_NAME)
+      .then(function(cache){
+        return cache.match(e.request)
+          .then(function(response){
+            var fetchPromise = fetch(e.request).then(function(networkResponse){
+              cache.put(e.request, networkResponse.clone());
+              return networkResponse;
+            })
+            return response || fetchPromise;
+          })
+      })
+  )
+})
+
+self.addEventListener('push', function(e){
   
 })
