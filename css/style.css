@@ -8,8 +8,76 @@ nav{
   background-color: #393e46;
 }
 
+/** HEADER */
+header{
+  position: relative;
+  font-family: 'Ubuntu', sans-serif;
+}
 
+header .jumbotron{
+  background: url('../assets/img/bg-jumbotron.jpg') no-repeat top;
+  background-size: cover;
+  filter: brightness(.225);
+  min-height: 90vh;
+}
+
+header .caption{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+header .caption h1{
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 5vw;
+}
+
+header .caption p{
+  font-size: 3vh;
+  font-weight: 100;
+}
+
+header .caption p::after{
+  content: "|";
+  animation: pointer 1s ease-in-out infinite alternate none;
+}
+
+header .caption p span::after{
+  content: "";
+  animation: typing 2s ease-in-out infinite alternate none;
+
+}
+
+@keyframes pointer{
+  0%{
+    content: "|"
+  }
+  50%{
+    content: "";
+  }
+}
+
+/** AKHIR HEADER */
+
+/** FOOTER */
 
 footer{
-  background-color: #222831 !important;
+  background-color: #1d222a !important;
+}
+
+.footer-copyright{
+  background-color: #15191e !important;
+}
+
+/** AKHIR FOOTER */
+
+@media screen and (max-width: 600px){
+  header .caption h1{
+    font-size: 6.75vh;
+  }
+  header .caption p{
+    font-size: 2.5vh;
+  }
 }
