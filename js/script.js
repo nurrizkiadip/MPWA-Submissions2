@@ -1,7 +1,7 @@
 //* Daftar Service Worker
-if('serviceWorker' in navigator){
+if("serviceWorker" in navigator){
   window.addEventListener("load", function(){
-    navigator.serviceWorker.register("../sw.js")
+    navigator.serviceWorker.register("../service-worker.js")
       .then(function(){
         console.log("Service Worker bekerja")
       })
@@ -19,11 +19,13 @@ if('serviceWorker' in navigator){
 //* Daftar push notification
 
 
+
+
 //*Event Listener
-document.addEventListener('DOMContentLoaded', homeInit);
+document.addEventListener('DOMContentLoaded', init);
 
 //* Function
-function homeInit(){
+function init(){
   M.Sidenav.init(document.querySelectorAll('nav .sidenav'));
 
   let page = window.location.hash.substr(1);
@@ -108,10 +110,18 @@ function homeInit(){
         .then(result => {
           header.innerHTML = result;
 
-          const textCaption = header.getElementsByTagName('p')[0].textContent;
-          const huruf = [...textCaption].map(h => `<span>${h}</span>`).join('');
-          console.log(textCaption);
-          console.log(huruf);
+          const textCaption = header.getElementsByTagName('p')[0];
+          const huruf = [...textCaption.textContent].map(h => `<span>${h}</span>`).join('');
+          textCaption.innerHTML = huruf;
+
+          // const textAnim = Array.from(header.getElementsByTagName('span'));
+          // const lengthText = textAnim.length;
+
+          // textAnim.forEach(function(char, i){
+          //   setInterval(function(){
+
+          //   })
+          // })
       })
       .catch(error => console.log("Error : " + error))
     
@@ -134,15 +144,21 @@ function homeInit(){
       .then(result => result.text())
       .then(result => {
           document.querySelector("main").innerHTML = result;
+
+          //* Slider
+          $(".owl-carousel").owlCarousel({
+            items: 1,
+            loop: true,
+            dots: false,
+            autoplay: true,
+            autoPlayTimeout: 1500
+          })
         })
       .catch(error => console.log("Error : " + error))
   }
 
   //* Animation
-  if(page == '' || page =="home"){
-    // const textCaption = document.querySelector('.jumbotron p');
-    // const huruf = [...textCaption.textContent].map(h => `<span>${h}</span>`).join('');
-    // console.log(textCaption);
-    // console.log(huruf);
-  }
+  
+
+  
 }
