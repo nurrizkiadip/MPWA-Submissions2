@@ -72,6 +72,7 @@ header .caption p span::after{
 .blogs .blog{
   background-color: #aaa;
   margin: 30px 0;
+  box-shadow: 0 0 5px 1px black;
 
   position: relative;
   overflow: hidden;

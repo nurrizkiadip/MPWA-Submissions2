@@ -145,14 +145,17 @@ function init(){
       .then(result => {
           document.querySelector("main").innerHTML = result;
 
-          //* Slider
-          $(".owl-carousel").owlCarousel({
-            items: 1,
-            loop: true,
-            dots: false,
-            autoplay: true,
-            autoPlayTimeout: 1500
-          })
+          const blogs = document.querySelector('main .blogs');
+          blogs.innerHTML = "";
+
+
+          getAllPosterTeam(2001);
+          getAllPosterTeam(2002);
+          getAllPosterTeam(2003);
+          getAllPosterTeam(2021);
+          getAllPosterTeam(2015);
+          getAllPosterTeam(2014);
+
         })
       .catch(error => console.log("Error : " + error))
   }
