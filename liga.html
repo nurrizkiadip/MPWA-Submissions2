@@ -28,25 +28,35 @@
   <title>Kabar Liga Bola</title>
 </head>
 <body>
-  <nav role="navigation" class="fixed">
+  <nav role="navigation">
     <div class="nav-wrapper container">
-      <a id="logo-container" href="#home" class="brand-logo">Logo</a>
+      <a class="btn-back" href="./index.html">
+        <i class="fas fa-arrow-left"></i>
+      </a>
+      <a id="logo-container" href="./index.html" class="brand-logo">Logo</a>
       <ul class="topnav right hide-on-med-and-down"></ul>
       <ul id="nav-mobile" class="sidenav"></ul>
       
-      <a href="#" data-target="nav-mobile" class="right sidenav-trigger"><i class="material-icons">menu</i></a>
+      <a href="#" data-target="nav-mobile" class="right sidenav-trigger">
+        <i class="material-icons">menu</i>
+      </a>
     </div>
   </nav>
 
-  <header></header>
-
-  <main id="body-content"></main>
+  <main id="body-content">
+  </main>
+  <footer class="page-footer">
+  </footer>
   
-  <footer class="page-footer"></footer>
-
+  <div class="fixed-action-btn">
+    <a class="btn-floating btn-large save-btn" id="save">
+      <i class="fas fa-save"></i>
+    </a>
+  </div>
+  
   <script src="js/materialize.min.js"></script>
   <script src="js/idb.js"></script>
   <script src="js/api.js"></script>
-  <script src="js/index.js"></script>
+  <script src="js/liga.js"></script>
 </body>
 </html>

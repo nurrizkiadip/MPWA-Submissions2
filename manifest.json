@@ -1,22 +1,22 @@
 {
   "name": "Kabar Liga Bola",
-  "short-name": "Liga Bola",
-  "description": "Kabar Liga Bola merupakan website penyedia informasi seputar sepak bola",
-  "theme_color": "#",
-  "background_color": "#",
+  "short_name": "Liga Bola",
+  "description": "Kabar Liga Bola merupakan website penyedia informasi tim liga inggris, spanyol, belanda, jerman, prancis dan eropa",
+  "theme_color": "#00adb5",
+  "background_color": "#2f9fa5",
   "display": "standalone",
   "scope": "/",
   "start_url": "/index.html",
   "icons": [
     {
-      "src": "/img/iconx/maskable_icon-512x512.png",
-      "sizes": "853x853",
+      "src": "/assets/iconx/512x512_maskable_icon.png",
+      "sizes": "568x568",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/img/iconx/maskable_icon-192x192.png",
-      "sizes": "320x320",
+      "src": "/assets/iconx/192x192_maskable_icon.png",
+      "sizes": "213x213",
       "type": "image/png",
       "purpose": "any maskable"
     }

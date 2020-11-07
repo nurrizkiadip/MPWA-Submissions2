@@ -1,26 +1,3 @@
-//* Daftar Service Worker
-if("serviceWorker" in navigator){
-  window.addEventListener("load", function(){
-    navigator.serviceWorker.register("../service-worker.js")
-      .then(function(){
-        console.log("Service Worker bekerja")
-      })
-      .catch(function(){
-        console.log("Service Worker tidak bekerja")
-      });
-  })
-} else {
-  console.log("Service Worker tidak didukung di versi/browser ini");
-}
-
-//* Daftar Indexed DB
-
-
-//* Daftar push notification
-
-
-
-
 //*Event Listener
 document.addEventListener('DOMContentLoaded', init);
 
@@ -30,6 +7,7 @@ function init(){
 
   let page = window.location.hash.substr(1);
   if(page == "") page = "home";
+  console.log(page);
 
   // *Calling function
   loadNav();
@@ -145,23 +123,24 @@ function init(){
       .then(result => {
           document.querySelector("main").innerHTML = result;
 
-          const blogs = document.querySelector('main .blogs');
-          blogs.innerHTML = "";
+          if(page == "" || page == "home"){
+            const blogs = document.querySelector('main .blogs');
+            blogs.innerHTML = "";
 
+            getAllPosterTeam(2001);
+            getAllPosterTeam(2002);
+            getAllPosterTeam(2003);
+            getAllPosterTeam(2021);
+            getAllPosterTeam(2015);
+            getAllPosterTeam(2014);
+          }
 
-          getAllPosterTeam(2001);
-          getAllPosterTeam(2002);
-          getAllPosterTeam(2003);
-          getAllPosterTeam(2021);
-          getAllPosterTeam(2015);
-          getAllPosterTeam(2014);
+          
 
         })
       .catch(error => console.log("Error : " + error))
   }
 
   //* Animation
-  
-
   
 }

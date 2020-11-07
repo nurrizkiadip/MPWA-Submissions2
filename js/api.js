@@ -4,6 +4,7 @@ const BASE_URL = "https://api.football-data.org/v2/";
 
 //* FUNCTION
 const ENDPOINT_COMPETITION = LEAGUE_ID => `${BASE_URL}competitions/${LEAGUE_ID}/standings`;
+const ENDPOINT_TEAMS = id_tim => `${BASE_URL}competitions/${id_tim}/teams`;
 
 const fetchAPI = url => {
   return fetch(url, {
@@ -30,37 +31,34 @@ const ligaInIndo = league => {
   else if(league === "France") return "Prancis"
   else if(league === "Spain") return"Spanyol"
   else if(league === "Netherlands") return"Belanda"
-  else if(league === "Germany") return"German"
+  else if(league === "Germany") return"Jerman"
   else if(league === "Europe") return"Eropa"
-
 }
 
-
 function getAllPosterTeam(id_liga) {
-  // if ("caches" in window) {
-  //   caches.match(ENDPOINT_COMPETITION).then(function (response) {
-  //     if (response) {
-  //       response.json().then(function (data) {
-  //         console.log("Competition Data: " + data);
-  //         showStanding(data);
-  //       })
-  //     }
-  //   })
-  // }
-  // console.log(ENDPOINT_COMPETITION(id_liga))
+  if ("caches" in window) {
+    caches.match(ENDPOINT_COMPETITION(id_liga)).then(function (response) {
+      if (response) {
+        response.json().then(function (data) {
+          console.log("Competition Data: " + data);
+          showBlogs(data);
+        })
+      }
+    })
+  }
   fetchAPI(ENDPOINT_COMPETITION(id_liga))
-    .then(data => {
-      showBlogs(data);
-    })
-    .catch(error => {
-      console.log(error)
-    })
+  .then(data => {
+    showBlogs(data);
+  })
+  .catch(error => {
+    console.log(error)
+  })
 }
 
 function showBlogs(data){
   let logo = '';
   let gambar = '';
-
+  console.log(data.standings[0].table)
   data.standings[0].table.forEach(function(tab){
     gambar += `
       <img src="${tab.team.crestUrl.replace(/^http:\/\//i, 'https://')}" alt="Gambar Logo Team">
@@ -68,19 +66,15 @@ function showBlogs(data){
   })
   // .replace(/^http:\/\//i, 'https://')
   logo = `
-    <div class="blog">
+    <div class="blog col l5 s12">
       <div class="blog-image">
-        ${gambar}
+          ${gambar}
       </div>
       <div class="blog-desc">
         <div class="row">
-          <div class="col l9 s12">
-            <h5>Liga ${ligaInIndo(data.competition.area.name)}</h5>
-            <span>${data.competition.lastUpdated}</span>
-          </div>
-          <div class="col l3 s12">
-            <a href="#">Lebih Lanjut</a>
-          </div>
+          <h5>Liga ${ligaInIndo(data.competition.area.name)}</h5>
+          <span>${data.competition.lastUpdated}</span>
+          <a href="./liga.html?id_league=${data.competition.id}">Lebih Lanjut</a>
         </div>
       </div>
     </div>
@@ -89,25 +83,104 @@ function showBlogs(data){
   document.querySelector('main .blogs').innerHTML += logo;
 }
 
-function showStanding(data) {
+
+function getTeams() {
+  // Ambil nilai query parameter (?id=)
+  const urlParams = new URLSearchParams(window.location.search);
+  const idParam = urlParams.get("id_league"); 
+  
+  if ("caches" in window) {
+    caches.match(ENDPOINT_COMPETITION(idParam)).then(function(response) {
+      if (response) {
+        response.json().then(function(data) {
+          caches.match(ENDPOINT_TEAMS(data.competition.id)).then(function(response) {
+            if (response) {
+              response.json().then(function(dataTeams) {
+                showTeams(dataTeams);
+
+              });
+            }
+          });
+        });
+      }
+    });
+  }
+
+  fetchAPI(ENDPOINT_COMPETITION(idParam))
+  .then(data => {
+    fetchAPI(ENDPOINT_TEAMS(data.competition.id))
+    .then(dataTeams => {
+      showTeams(dataTeams);
+    })
+  });
+}
+
+
+
+function showTeams(dataTeams) {
   let standings = "";
-  let standingElement = document.getElementById("homeStandings");
+  console.log(dataTeams.teams)
+  dataTeams.teams.forEach(function (team) {
+      standings += `
+        <tr>
+          <td><img src="${team.crestUrl}" width="30px" alt="badge"/></td>
+          <td>${team.name} (${team.shortName})</td>
+          <td>${team.clubColors}</td>
+          <td>${team.address}</td>
+          <td>${team.phone}</td>
+          <td>${team.email}</td>
+          <td>${team.website}</td>
+        </tr>
+      `;
+  });
+
+  document.getElementById('body-content').innerHTML = `
+  <div class="container">
+    <h3 class="judulLiga">Daftar Tim Liga ${ligaInIndo(dataTeams.competition.area.name)}</h3>
+
+    <div class="card teams-details" style="padding-left: 24px; padding-right: 24px; margin-top: 30px;">
+
+      <table class="striped responsive-table">
+        <thead>
+          <tr>
+              <th style="height:65px">Logo</th>
+              <th>Nama Tim</th>
+              <th>Warna Kostum</th>
+              <th>Alamat</th>
+              <th>Telepon</th>
+              <th>E-mail</th>
+              <th>Website</th>
+          </tr>
+        </thead>
+        <tbody id="standings">
+          ${standings}
+        </tbody>
+      </table>
+      
+    </div>
+  </div>
+  `;
+}
+
+function showStandings(data) {
+  let standings = "";
+  let standingElement =  document.getElementById("homeStandings");
 
   
   data.standings[0].table.forEach(function (standing) {
-    standings += `
-      <tr>
-        <td><img src="${standing.team.crestUrl.replace(/^http:\/\//i, 'https://')}" width="30px" alt="badge"/></td>
-        <td>${standing.team.name}</td>
-        <td>${standing.won}</td>
-        <td>${standing.draw}</td>
-        <td>${standing.lost}</td>
-        <td>${standing.points}</td>
-        <td>${standing.goalsFor}</td>
-        <td>${standing.goalsAgainst}</td>
-        <td>${standing.goalDifference}</td>
-      </tr>
-    `;
+      standings += `
+        <tr>
+          <td><img src="${standing.team.crestUrl.replace(/^http:\/\//i, 'https://')}" width="30px" alt="badge"/></td>
+          <td>${standing.team.name}</td>
+          <td>${standing.won}</td>
+          <td>${standing.draw}</td>
+          <td>${standing.lost}</td>
+          <td>${standing.points}</td>
+          <td>${standing.goalsFor}</td>
+          <td>${standing.goalsAgainst}</td>
+          <td>${standing.goalDifference}</td>
+        </tr>
+      `;
   });
 
   standingElement.innerHTML = `
@@ -116,22 +189,22 @@ function showStanding(data) {
       <table class="striped responsive-table">
         <thead>
           <tr>
-            <th></th>
-            <th>Team Name</th>
-            <th>W</th>
-            <th>D</th>
-            <th>L</th>
-            <th>P</th>
-            <th>GF</th>
-            <th>GA</th>
-            <th>GD</th>
+              <th></th>
+              <th>Team Name</th>
+              <th>W</th>
+              <th>D</th>
+              <th>L</th>
+              <th>P</th>
+              <th>GF</th>
+              <th>GA</th>
+              <th>GD</th>
           </tr>
         </thead>
         <tbody id="standings">
           ${standings}
         </tbody>
       </table>
-    
+      
     </div>
   `;
 }

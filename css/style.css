@@ -8,6 +8,10 @@ nav{
   background-color: #393e46;
 }
 
+nav .btn-back{
+  margin: 0 20px;
+}
+
 /** HEADER */
 header{
   position: relative;
@@ -69,14 +73,21 @@ header .caption p span::after{
 
 
 /** HOME  */
+.blogs{
+  display: block;
+  margin: auto !important;
+}
 .blogs .blog{
-  background-color: #aaa;
-  margin: 30px 0;
-  box-shadow: 0 0 5px 1px black;
-
+  min-height: 450px;
+  max-height: 480px;
+  margin: 30px 60px;
+  box-shadow: 0 0 10px 0px rgba(0, 0, 0, .5);
+  
   position: relative;
   overflow: hidden;
+  border-radius: 4px;
 }
+
 .blogs .blog-image{
   display: flex;
   flex-wrap: wrap;
@@ -97,8 +108,9 @@ header .caption p span::after{
 
   background-color: #333333cb;
   position: absolute;
+  left: 0;
   bottom: -30px;
-  padding: 30px 30px 50px;
+  padding: 20px 30px 25px;
   width: 100%;
 
   color: white;
@@ -114,7 +126,7 @@ header .caption p span::after{
 
   position: absolute;
   bottom: 50px;
-  right: 60px;
+  right: 50px;
   
   transition: .25s linear;
 }
@@ -135,7 +147,19 @@ header .caption p span::after{
 
 /** AKHIR HOME  */
 
+/** TEAM DETAILS */
+#body-content .judulLiga{
+  text-align: center;
+}
 
+#body-content .teams-details thead th{
+  text-align: center;
+}
+/** AKHIR TEAM DETAILS */
+
+.save-btn{
+  background-color: #00adb5;
+}
 /** AKHIR MAIN */
 
 
@@ -161,5 +185,9 @@ footer .footer-content{
   }
   header .caption p{
     font-size: 2.5vh;
+  }
+
+  .blogs .blog{
+    min-height: 300px;
   }
 }
