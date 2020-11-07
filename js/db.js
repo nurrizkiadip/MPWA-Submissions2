@@ -1,20 +1,23 @@
-/*
-var dbPromised = idb.open("kabar-liga", 1, function(upgradeDb) {
-    var articlesObjectStore = upgradeDb.createObjectStore("articles", {
-        keyPath: "ID"
+const idxDB = idb.open("kabar-liga", 1, function(upgradeDb) {
+    const ligaObjekStore = upgradeDb.createObjectStore("leagues", {
+        keyPath: "id"
     });
-    articlesObjectStore.createIndex("post_title", "post_title", {
+    ligaObjekStore.createIndex("league", "league", {
         unique: false
     });
 });
 
-function saveForLater(article) {
-    dbPromised
+function saveFavLiga(teams) {
+    idxDB
     .then(function(db) {
-        var tx = db.transaction("articles", "readwrite");
-        var store = tx.objectStore("articles");
-        console.log(article);
-        store.add(article.result);
+        const tx = db.transaction("leagues", "readwrite");
+        const item = {
+            id: teams.competition.id,
+            name: teams.competition.area.name,
+            lastUpdated: teams.competition.lastUpdated,
+            teams: teams.teams
+        }
+        tx.objectStore("leagues").add(item);
         return tx.complete;
     })
     .then(function() {
@@ -23,44 +26,46 @@ function saveForLater(article) {
 }
 
 function getAll() {
-return new Promise(function(resolve, reject) {
-    dbPromised
-    .then(function(db) {
-        var tx = db.transaction("articles", "readonly");
-        var store = tx.objectStore("articles");
-        return store.getAll();
-    })
-    .then(function(articles) {
-        resolve(articles);
-    });
-});
-}
-
-function getAllByTitle(title) {
-dbPromised
-    .then(function(db) {
-    var tx = db.transaction("articles", "readonly");
-    var store = tx.objectStore("articles");
-    var titleIndex = store.index("post_title");
-    var range = IDBKeyRange.bound(title, title + "\uffff");
-    return titleIndex.getAll(range);
-    })
-    .then(function(articles) {
-    console.log(articles);
+    return new Promise(function(resolve, reject) {
+        idxDB
+        .then(function(db) {
+            const tx = db.transaction("leagues", "readonly");
+            const store = tx.objectStore("leagues");
+            return store.getAll();
+        })
+        .then(function(liga) {
+            resolve(liga);
+        })
+        .catch(error => console.log(error));
     });
 }
 
-function getById(id) {
-return new Promise(function(resolve, reject) {
-    dbPromised
-    .then(function(db) {
-        var tx = db.transaction("articles", "readonly");
-        var store = tx.objectStore("articles");
-        return store.get(id);
-    })
-    .then(function(article) {
-        resolve(article);
+// function getAllByTitle(title) {
+//     idxDB
+//     .then(function(db) {
+//         const tx = db.transaction("leagues", "readonly");
+//         const store = tx.objectStore("leagues");
+//         const titleIndex = store.index("post_title");
+//         const range = IDBKeyRange.bound(title, title + "\uffff");
+//         return titleIndex.getAll(range);
+//     })
+//     .then(function(liga) {
+//         console.log(liga);
+//     });
+// }
+
+function getLigaById(id) {
+    return new Promise(function(resolve, reject) {
+        idxDB
+        .then(function(db) {
+            const tx = db.transaction("leagues", "readonly");
+            const store = tx.objectStore("leagues");
+            console.log(store.get(id))
+            return store.get(id);
+        })
+        .then(function(data) {
+            console.log(data)
+            resolve(data);
+        });
     });
-});
 }
-*/

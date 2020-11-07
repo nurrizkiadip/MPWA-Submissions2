@@ -1,4 +1,4 @@
-const CACHE_NAME = "kabarliga-v2";
+const CACHE_NAME = "kabarliga-v3";
 
 const urlsToCache = [
   "/",
@@ -38,24 +38,24 @@ const urlsToCache = [
   "https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap",
   "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css",
 
-  "https://api.football-data.org/v2/competitions/2001/standings",
-  "https://api.football-data.org/v2/competitions/2002/standings",
-  "https://api.football-data.org/v2/competitions/2003/standings",
-  "https://api.football-data.org/v2/competitions/2015/standings",
-  "https://api.football-data.org/v2/competitions/2014/standings",
-  "https://api.football-data.org/v2/competitions/2021/standings",
+  // "https://api.football-data.org/v2/competitions/2001/standings",
+  // "https://api.football-data.org/v2/competitions/2002/standings",
+  // "https://api.football-data.org/v2/competitions/2003/standings",
+  // "https://api.football-data.org/v2/competitions/2015/standings",
+  // "https://api.football-data.org/v2/competitions/2014/standings",
+  // "https://api.football-data.org/v2/competitions/2021/standings",
 
-  "https://api.football-data.org/v2/competitions/2001/teams",
-  "https://api.football-data.org/v2/competitions/2002/teams",
-  "https://api.football-data.org/v2/competitions/2003/teams",
-  "https://api.football-data.org/v2/competitions/2015/teams",
-  "https://api.football-data.org/v2/competitions/2014/teams",
-  "https://api.football-data.org/v2/competitions/2021/teams",
+  // "https://api.football-data.org/v2/competitions/2001/teams",
+  // "https://api.football-data.org/v2/competitions/2002/teams",
+  // "https://api.football-data.org/v2/competitions/2003/teams",
+  // "https://api.football-data.org/v2/competitions/2015/teams",
+  // "https://api.football-data.org/v2/competitions/2014/teams",
+  // "https://api.football-data.org/v2/competitions/2021/teams",
 
 ];
 
 self.addEventListener("install", function (event) {
-  self.skipWaiting();
+  // self.skipWaiting();
   event.waitUntil(
     caches.open(CACHE_NAME).then(function(cache) {
         return cache.addAll(urlsToCache);
@@ -97,3 +97,24 @@ self.addEventListener("fetch", function(event) {
     )
   }
 });
+
+// self.addEventListener('push', function(event) {
+//   let body;
+//   if (event.data) {
+//     body = event.data.text();
+//   } else {
+//     body = 'Push message no payload';
+//   }
+//   const options = {
+//     body: body,
+//     icon: 'img/notification.png',
+//     vibrate: [100, 50, 100],
+//     data: {
+//       dateOfArrival: Date.now(),
+//       primaryKey: 1
+//     }
+//   };
+//   event.waitUntil(
+//     self.registration.showNotification('Push Notification', options)
+//   );
+// });

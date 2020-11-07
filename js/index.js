@@ -1,23 +1,42 @@
 //* Daftar Service Worker
-if("serviceWorker" in navigator){
-  window.addEventListener("load", function(){
-    navigator.serviceWorker.register("../service-worker.js")
-      .then(function(){
-        console.log("Service Worker bekerja")
-      })
-      .catch(function(){
-        console.log("Service Worker tidak bekerja")
-      });
-  })
+if (!('serviceWorker' in navigator)) {
+  console.log("Service worker tidak didukung browser ini.");
 } else {
-  console.log("Service Worker tidak didukung di versi/browser ini");
+  registerServiceWorker();
+  // requestPermission();
+}
+// Register service worker
+function registerServiceWorker() {
+  return navigator.serviceWorker.register('../service-worker.js')
+    .then(function (registration) {
+      console.log('Registrasi service worker berhasil.');
+      return registration;
+    })
+    .catch(function (err) {
+      console.error('Registrasi service worker gagal.', err);
+    });
+}
+function requestPermission() {
+  if ('Notification' in window) {
+    Notification.requestPermission()
+    .then(function (result) {
+      if (result === "denied") {
+        console.log("Fitur notifikasi tidak diijinkan.");
+        return;
+      } else if (result === "default") {
+        console.error("Pengguna menutup kotak dialog permintaan ijin.");
+        return;
+      }
+
+      navigator.serviceWorker.getRegistration()
+      .then(function(reg) {
+        reg.showNotification('Notifikasi diijinkan!');
+      });
+    });
+  }
 }
 
 //* Daftar Indexed DB
-
-
-//* Daftar push notification
-
 
 
 
@@ -155,6 +174,8 @@ function init(){
             getAllPosterTeam(2021);
             getAllPosterTeam(2015);
             getAllPosterTeam(2014);
+          } else if(page =='saved'){
+            getSavedLiga();
           }
 
 

@@ -87,7 +87,19 @@ function init(){
     }
   }
 
-  getTeams();
+  const isFromSaved = new URLSearchParams(window.location.search).get("saved");
+  const saveBtn = document.getElementById('save');
+  let ligas;
 
-  
+  if(isFromSaved){
+    saveBtn.style.display = 'none';
+
+    getSavedLigaById();
+  } else {
+    ligas = getTeams();
+  }
+
+  saveBtn.addEventListener('click', function(){
+    ligas.then(teams => saveFavLiga(teams))
+  })
 }
