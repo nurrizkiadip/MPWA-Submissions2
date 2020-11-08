@@ -1,7 +1,6 @@
 {
   "name": "kabar-liga-bola",
   "version": "1.0.0",
-  "description": "",
   "main": "service-worker.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -19,5 +18,8 @@
   "devDependencies": {
     "eslint": "^7.13.0",
     "web-push": "^3.4.4"
-  }
+  },
+  "dependencies": {},
+  "keywords": [],
+  "description": ""
 }

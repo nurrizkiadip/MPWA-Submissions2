@@ -5,14 +5,7 @@ if (!('serviceWorker' in navigator)) {
   requestPermission();
 }
 
-
-//*Event Listener
-document.addEventListener('DOMContentLoaded', init);
-
-
-//* Function
 //* Daftar Service Worker
-// Register service worker
 function registerServiceWorker() {
   return navigator.serviceWorker.register('../service-worker.js')
     .then(function (registration) {
@@ -68,6 +61,10 @@ function urlBase64ToUint8Array(base64String) {
   }
   return outputArray;
 }
+
+
+//*Event Listener
+document.addEventListener('DOMContentLoaded', init);
 
 
 function init(){
