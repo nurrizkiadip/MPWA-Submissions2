@@ -1,4 +1,4 @@
-const CACHE_NAME = "kabarliga-v3";
+const CACHE_NAME = "kabarliga-v1";
 
 const urlsToCache = [
   "/",

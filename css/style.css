@@ -117,18 +117,32 @@ header .caption p span::after{
   transition: .25s linear;
 }
 
-.blogs .blog .blog-desc a{
+.blogs .blog .blog-desc .button{
   opacity: 0;
+
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  bottom: 17px;
+  right: 50px;
+  
+  transition: .25s linear;
+}
+
+.blogs .blog-desc .button a,
+.blogs .blog-desc .button button{
   color: white;
   border-radius: 3px;
   padding: 7px 20px;
   border: 2.7px solid #ecfeff;
-
-  position: absolute;
-  bottom: 50px;
-  right: 50px;
+  margin: 8px 0;
+  cursor: pointer;
   
   transition: .25s linear;
+}
+
+.blogs .blog .blog-desc button:hover{
+  background-color: #e73a3a;
 }
 
 .blogs .blog .blog-desc a:hover{
@@ -139,7 +153,7 @@ header .caption p span::after{
   bottom: 0;
 }
 
-.blogs .blog:hover .blog-desc a{
+.blogs .blog:hover .blog-desc .button{
   align-self: flex-end;
   opacity: 1;
 }

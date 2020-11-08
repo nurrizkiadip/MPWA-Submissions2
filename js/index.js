@@ -36,9 +36,6 @@ function requestPermission() {
   }
 }
 
-//* Daftar Indexed DB
-
-
 
 //*Event Listener
 document.addEventListener('DOMContentLoaded', init);
@@ -77,9 +74,18 @@ function init(){
 
         document.querySelectorAll('nav .topnav a, nav .sidenav a, nav #logo-container')
           .forEach(function(nav){
+
             nav.addEventListener('click', function(e){
               // Menutup sidebar yg terbuka
               M.Sidenav.getInstance(document.querySelector('nav .sidenav')).close();
+
+              // active menu
+              e.target.parentElement.classList.add('active')
+              menus.forEach(function(menu){
+                Array.from(menu.children).forEach(function(li){
+                  li.classList.remove('active');
+                })
+              })
 
               // mengaktifkan anchor
               page = e.target.getAttribute('href').substr(1);
@@ -163,11 +169,9 @@ function init(){
       .then(result => result.text())
       .then(result => {
           document.querySelector("main").innerHTML = result;
-
-          if(page == "" || page == "home"){
+          if(page == "home"){
             const blogs = document.querySelector('main .blogs');
             blogs.innerHTML = "";
-
             getAllPosterTeam(2001);
             getAllPosterTeam(2002);
             getAllPosterTeam(2003);
@@ -175,16 +179,31 @@ function init(){
             getAllPosterTeam(2015);
             getAllPosterTeam(2014);
           } else if(page =='saved'){
-            getSavedLiga();
+            getSavedLiga()
+            .then(function(result){
+              const deletesBtn = document.querySelectorAll('.blogs .button #deleteBtn');
+              console.log(deletesBtn)
+              deletesBtn.forEach(function(del){
+                del.addEventListener('click', function(e){
+                  const idLiga = e.target.getAttribute('id_liga')
+                  deleteFavLiga(idLiga)
+                  .then(function(){
+                    getSavedLiga();
+                  });
+                })
+              })
+
+            })
+            .catch(error => console.log(error));
+
           }
 
-
-
         })
-      .catch(error => console.log("Error : " + error))
+        .catch(error => console.log("Error : " + error))
   }
 
-  //* Animation
+  //* Active Menu
+
   
 
   

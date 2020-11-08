@@ -41,7 +41,7 @@ function getAllPosterTeam(id_liga) {
       if (response) {
         response.json().then(function (data) {
           console.log(data);
-          showBlogs(data);
+          return showBlogs(data);
         })
       }
     })
@@ -50,7 +50,7 @@ function getAllPosterTeam(id_liga) {
   fetchAPI(ENDPOINT_COMPETITION(id_liga))
   .then(data => {
     console.log(data);
-    showBlogs(data);
+    return showBlogs(data);
   })
   .catch(error => {
     console.log(error)
@@ -60,7 +60,7 @@ function getAllPosterTeam(id_liga) {
 function showBlogs(data){
   let logo = '';
   let gambar = '';
-  console.log(data)
+
   data.standings[0].table.forEach(function(tab){
     gambar += `
       <img src="${tab.team.crestUrl.replace(/^http:\/\//i, 'https://')}" alt="Gambar Logo Team">
@@ -76,7 +76,9 @@ function showBlogs(data){
         <div class="row">
           <h5>Liga ${ligaInIndo(data.competition.area.name)}</h5>
           <span>${data.competition.lastUpdated}</span>
-          <a href="./liga.html?id_liga=${data.competition.id}">Lebih Lanjut</a>
+          <div class="button">
+            <a href="./liga.html?id_liga=${data.competition.id}">Lebih Lanjut</a>
+          </div> 
         </div>
       </div>
     </div>
@@ -171,49 +173,62 @@ function showTeams(dataTeams) {
 
 //? Saved
 function getSavedLiga() {
-  getAll().then(function(ligas) {
-    console.log(ligas);
-
-    // Menyusun komponen card artikel secara dinamis
-    let ligaCard = "";
-    ligas.forEach(function(liga) {
-      let gambar = '';
-
-      liga.teams.forEach(function(team){
-        gambar += `
-          <img src="${team.crestUrl}" alt="Gambar Logo Team">
-        `
-      })
-    
-      ligaCard += `
-      <div class="container">
-        <div class="blogs row">
-          <div class="blog col l5 s12">
-            <div class="blog-image">
-                ${gambar}
-            </div>
-            <div class="blog-desc">
-              <div class="row">
-                <h5>Liga ${ligaInIndo(liga.name)}</h5>
-                <span>${liga.lastUpdated}</span>
-                <a href="./liga.html?id_liga=${liga.id}&saved=true">Lebih Lanjut</a>
+  return new Promise(function(resolve, reject){
+    getAll().then(function(ligas) {
+      console.log(ligas);
+  
+      // Menyusun komponen card artikel secara dinamis
+      let ligaCard = "";
+      ligas.forEach(function(liga) {
+        let gambar = '';
+  
+        liga.teams.forEach(function(team){
+          gambar += `
+            <img src="${team.crestUrl}" alt="Gambar Logo Team">
+          `
+        })
+      
+        ligaCard += `
+            <div class="blog col l5 s12">
+              <div class="blog-image">
+                  ${gambar}
+              </div>
+              <div class="blog-desc">
+                <div class="row">
+                  <h5>Liga ${ligaInIndo(liga.name)}</h5>
+                  <span>${liga.lastUpdated}</span>
+                  <div class="button">
+                    <a href="./liga.html?id_liga=${liga.id}&saved=true">Lebih Lanjut</a>
+                    <button id="deleteBtn" type="submit" id_liga="${liga.id}">Hapus</button>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
+        `;
+      });
+      // Sisipkan komponen card ke dalam elemen dengan id #content
+      document.getElementById("body-content").innerHTML = `
+      <div class="container">
+        <div class="blogs row">
+          ${ligaCard}
         </div>
       </div>
       `;
-    });
-    // Sisipkan komponen card ke dalam elemen dengan id #content
-    document.getElementById("body-content").innerHTML = ligaCard;
-  });
+
+      resolve(true);
+    })
+    .catch(err => reject(err));
+    
+  })
 }
 
 function getSavedLigaById() {
   var urlParams = new URLSearchParams(window.location.search);
-  var idParam = urlParams.get("id_liga");
+  var idParam = urlParams.get("id_liga"); //typedata string
   let ligaDetails = '';
-  getLigaById(idParam).then(function(liga) {
+
+  // idParam must convert to number before using it bcs of the DB 
+  getLigaById(parseInt(idParam)).then(function(liga) {
     console.log(liga)
     liga.teams.forEach(function(team){
       ligaDetails += `

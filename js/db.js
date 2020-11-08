@@ -21,8 +21,26 @@ function saveFavLiga(teams) {
         return tx.complete;
     })
     .then(function() {
-        console.log("Artikel berhasil di simpan.");
+        console.log("Liga favorit ditambahkan");
     });
+}
+
+function deleteFavLiga(id){
+    return new Promise(function(resolve, reject) {
+        idxDB
+        .then(function(db){
+            const tx = db.transaction("leagues", 'readwrite');
+            tx.objectStore('leagues').delete(id);
+            return tx;
+        })
+        .then(function(tx){
+            if (tx.complete) {
+                resolve(true)
+            } else {
+                reject(new Error(tx.onerror))
+            }
+        })
+    })
 }
 
 function getAll() {
@@ -59,13 +77,12 @@ function getLigaById(id) {
         idxDB
         .then(function(db) {
             const tx = db.transaction("leagues", "readonly");
-            const store = tx.objectStore("leagues");
-            console.log(store.get(id))
-            return store.get(id);
+            return tx.objectStore("leagues").get(id);
         })
         .then(function(data) {
             console.log(data)
             resolve(data);
-        });
+        })
+        .catch(error => reject(error));
     });
 }
