@@ -171,10 +171,27 @@ header .caption p span::after{
 }
 /** AKHIR TEAM DETAILS */
 
-.save-btn{
+#save{
   background-color: #00adb5;
 }
+
+#delete{
+  background-color: #ff5b19;
+  display: none;
+}
 /** AKHIR MAIN */
+
+
+/** ABOUT */
+.about-content .about-img img{
+  width: 100%;
+}
+
+.about-content .about-desc p{
+  text-align: justify;
+  line-height: 1.2rem;
+}
+/** AKHIR ABOUT */
 
 
 /** FOOTER */

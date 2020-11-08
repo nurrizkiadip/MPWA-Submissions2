@@ -189,21 +189,20 @@ function getSavedLiga() {
         })
       
         ligaCard += `
-            <div class="blog col l5 s12">
-              <div class="blog-image">
-                  ${gambar}
-              </div>
-              <div class="blog-desc">
-                <div class="row">
-                  <h5>Liga ${ligaInIndo(liga.name)}</h5>
-                  <span>${liga.lastUpdated}</span>
-                  <div class="button">
-                    <a href="./liga.html?id_liga=${liga.id}&saved=true">Lebih Lanjut</a>
-                    <button id="deleteBtn" type="submit" id_liga="${liga.id}">Hapus</button>
-                  </div>
+          <div class="blog col l5 s12">
+            <div class="blog-image">
+                ${gambar}
+            </div>
+            <div class="blog-desc">
+              <div class="row">
+                <h5>Liga ${ligaInIndo(liga.name)}</h5>
+                <span>${liga.lastUpdated}</span>
+                <div class="button">
+                  <a href="./liga.html?id_liga=${liga.id}&saved=true">Lebih Lanjut</a>
                 </div>
               </div>
             </div>
+          </div>
         `;
       });
       // Sisipkan komponen card ke dalam elemen dengan id #content
@@ -216,9 +215,7 @@ function getSavedLiga() {
       `;
 
       resolve(true);
-    })
-    .catch(err => reject(err));
-    
+    }).catch(err => reject(err));
   })
 }
 
@@ -229,7 +226,6 @@ function getSavedLigaById() {
 
   // idParam must convert to number before using it bcs of the DB 
   getLigaById(parseInt(idParam)).then(function(liga) {
-    console.log(liga)
     liga.teams.forEach(function(team){
       ligaDetails += `
         <tr>

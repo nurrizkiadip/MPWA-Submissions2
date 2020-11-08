@@ -1,0 +1,23 @@
+{
+  "name": "kabar-liga-bola",
+  "version": "1.0.0",
+  "description": "",
+  "main": "service-worker.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nurrizkiadip/MPWA-Submissions2.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nurrizkiadip/MPWA-Submissions2/issues"
+  },
+  "homepage": "https://github.com/nurrizkiadip/MPWA-Submissions2#readme",
+  "devDependencies": {
+    "eslint": "^7.13.0",
+    "web-push": "^3.4.4"
+  }
+}

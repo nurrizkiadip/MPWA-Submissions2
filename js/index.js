@@ -1,10 +1,17 @@
-//* Daftar Service Worker
 if (!('serviceWorker' in navigator)) {
   console.log("Service worker tidak didukung browser ini.");
 } else {
   registerServiceWorker();
-  // requestPermission();
+  requestPermission();
 }
+
+
+//*Event Listener
+document.addEventListener('DOMContentLoaded', init);
+
+
+//* Function
+//* Daftar Service Worker
 // Register service worker
 function registerServiceWorker() {
   return navigator.serviceWorker.register('../service-worker.js')
@@ -28,19 +35,41 @@ function requestPermission() {
         return;
       }
 
-      navigator.serviceWorker.getRegistration()
-      .then(function(reg) {
-        reg.showNotification('Notifikasi diijinkan!');
-      });
+      if (('PushManager' in window)) {
+        navigator.serviceWorker.getRegistration().then(function(registration) {
+          registration.pushManager.subscribe({
+            userVisibleOnly: true,
+            applicationServerKey: urlBase64ToUint8Array("BHKxgJaZnFQfNyuUM3YjdLPgO8DL-n9BlciqOKEvqMVersMYAA0u7b6qKHTD7OBKkdTHeZmPcDAUIkjO8f_Le_M")
+          }).then(function(subscribe) {
+            
+            console.log('Berhasil melakukan subscribe dengan endpoint: ', subscribe.endpoint);
+            console.log('Berhasil melakukan subscribe dengan p256dh key: ', btoa(String.fromCharCode.apply(
+                null, new Uint8Array(subscribe.getKey('p256dh')))));
+            console.log('Berhasil melakukan subscribe dengan auth key: ', btoa(String.fromCharCode.apply(
+                null, new Uint8Array(subscribe.getKey('auth')))));
+          }).catch(function(e) {
+            console.error('Tidak dapat melakukan subscribe ', e.message);
+          });
+        });
+    }
     });
   }
 }
 
+function urlBase64ToUint8Array(base64String) {
+  const padding = '='.repeat((4 - base64String.length % 4) % 4);
+  const base64 = (base64String + padding)
+      .replace(/-/g, '+')
+      .replace(/_/g, '/');
+  const rawData = window.atob(base64);
+  const outputArray = new Uint8Array(rawData.length);
+  for (let i = 0; i < rawData.length; ++i) {
+      outputArray[i] = rawData.charCodeAt(i);
+  }
+  return outputArray;
+}
 
-//*Event Listener
-document.addEventListener('DOMContentLoaded', init);
 
-//* Function
 function init(){
   M.Sidenav.init(document.querySelectorAll('nav .sidenav'));
 
@@ -180,21 +209,11 @@ function init(){
             getAllPosterTeam(2014);
           } else if(page =='saved'){
             getSavedLiga()
-            .then(function(result){
-              const deletesBtn = document.querySelectorAll('.blogs .button #deleteBtn');
-              console.log(deletesBtn)
-              deletesBtn.forEach(function(del){
-                del.addEventListener('click', function(e){
-                  const idLiga = e.target.getAttribute('id_liga')
-                  deleteFavLiga(idLiga)
-                  .then(function(){
-                    getSavedLiga();
-                  });
-                })
-              })
+            // .then(function(result){
+              
 
-            })
-            .catch(error => console.log(error));
+            // })
+            // .catch(error => console.log(error));
 
           }
 

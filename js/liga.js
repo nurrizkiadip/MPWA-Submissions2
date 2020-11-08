@@ -87,12 +87,15 @@ function init(){
     }
   }
 
+  // Saved Artikel
   const isFromSaved = new URLSearchParams(window.location.search).get("saved");
   const saveBtn = document.getElementById('save');
-  let ligas;
-
+  const deleteBtn = document.getElementById('delete');
+  let ligas = new URLSearchParams(window.location.search).get("id_liga");
+  console.log(ligas)
   if(isFromSaved){
     saveBtn.style.display = 'none';
+    deleteBtn.style.display = 'inline-block';
 
     getSavedLigaById();
   } else {
@@ -101,5 +104,11 @@ function init(){
 
   saveBtn.addEventListener('click', function(){
     ligas.then(teams => saveFavLiga(teams))
+    window.location.href = "./index.html#saved";
+  })
+
+  deleteBtn.addEventListener('click', function(){
+    deleteFavLiga(parseInt(ligas)).then(_ => getSavedLiga());
+    window.location.href = "./index.html#saved";
   })
 }

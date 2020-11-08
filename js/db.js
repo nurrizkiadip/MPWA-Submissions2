@@ -29,7 +29,7 @@ function deleteFavLiga(id){
     return new Promise(function(resolve, reject) {
         idxDB
         .then(function(db){
-            const tx = db.transaction("leagues", 'readwrite');
+            const tx = db.transaction("leagues", "readwrite");
             tx.objectStore('leagues').delete(id);
             return tx;
         })
