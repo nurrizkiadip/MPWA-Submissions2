@@ -43,18 +43,20 @@ function getAllPosterTeam(id_liga) {
           console.log(data);
           return showBlogs(data);
         })
+      } else {
+        fetchAPI(ENDPOINT_COMPETITION(id_liga))
+        .then(data => {
+          console.log(data);
+          return showBlogs(data);
+        })
+        .catch(error => {
+          console.log(error)
+        })
       }
     })
-  }
+  } 
 
-  fetchAPI(ENDPOINT_COMPETITION(id_liga))
-  .then(data => {
-    console.log(data);
-    return showBlogs(data);
-  })
-  .catch(error => {
-    console.log(error)
-  })
+  
 }
 
 function showBlogs(data){
@@ -64,9 +66,8 @@ function showBlogs(data){
   data.standings[0].table.forEach(function(tab){
     gambar += `
       <img src="${tab.team.crestUrl.replace(/^http:\/\//i, 'https://')}" alt="Gambar Logo Team">
-    `
+    `;
   })
-  // .replace(/^http:\/\//i, 'https://')
   logo = `
     <div class="blog col l5 s12">
       <div class="blog-image">
@@ -106,22 +107,22 @@ function getTeams() {
                   
                   resolve(dataTeams)
                 });
+              } else {
+                fetchAPI(ENDPOINT_COMPETITION(idParam))
+                .then(data => {
+                  fetchAPI(ENDPOINT_TEAMS(data.competition.id))
+                  .then(dataTeams => {
+                    showTeams(dataTeams);
+          
+                    resolve(dataTeams);
+                  })
+                });
               }
             });
           });
         }
       });
     }
-
-    fetchAPI(ENDPOINT_COMPETITION(idParam))
-    .then(data => {
-      fetchAPI(ENDPOINT_TEAMS(data.competition.id))
-      .then(dataTeams => {
-        showTeams(dataTeams);
-
-        resolve(dataTeams)
-      })
-    });
   });
 }
 
@@ -143,7 +144,7 @@ function showTeams(dataTeams) {
       `;
   });
 
-  document.getElementById('body-content').innerHTML = `
+  document.getElementById('body-content').innerHTML += `
   <div class="container">
     <h3 class="judulLiga">Daftar Tim Liga ${ligaInIndo(dataTeams.competition.area.name)}</h3>
 
@@ -175,7 +176,7 @@ function showTeams(dataTeams) {
 function getSavedLiga() {
   return new Promise(function(resolve, reject){
     getAll().then(function(ligas) {
-      console.log(ligas);
+      const savedPage = document.querySelector("#body-content .blogs")
   
       // Menyusun komponen card artikel secara dinamis
       let ligaCard = "";
@@ -205,17 +206,17 @@ function getSavedLiga() {
           </div>
         `;
       });
-      // Sisipkan komponen card ke dalam elemen dengan id #content
-      document.getElementById("body-content").innerHTML = `
-      <div class="container">
-        <div class="blogs row">
-          ${ligaCard}
-        </div>
-      </div>
-      `;
+      console.log(ligas)
+      
+      if (!(Array.isArray(ligas) && ligas.length)) {
+        savedPage.parentElement.innerHTML = '';
+        ligaCard = `<h5 style="text-align:center; margin:50px 0">Tidak ada Liga favorit</h5>`
+        document.querySelector("#body-content .container").parentElement.innerHTML = ligaCard;
+      } else savedPage.innerHTML = ligaCard;
 
       resolve(true);
-    }).catch(err => reject(err));
+    })
+    .catch(err => reject(err));
   })
 }
 
@@ -270,49 +271,3 @@ function getSavedLigaById() {
   });
 }
 
-// function showStandings(data) {
-//   let standings = "";
-//   let standingElement =  document.getElementById("homeStandings");
-
-  
-//   data.standings[0].table.forEach(function (standing) {
-//       standings += `
-//         <tr>
-//           <td><img src="${standing.team.crestUrl.replace(/^http:\/\//i, 'https://')}" width="30px" alt="badge"/></td>
-//           <td>${standing.team.name}</td>
-//           <td>${standing.won}</td>
-//           <td>${standing.draw}</td>
-//           <td>${standing.lost}</td>
-//           <td>${standing.points}</td>
-//           <td>${standing.goalsFor}</td>
-//           <td>${standing.goalsAgainst}</td>
-//           <td>${standing.goalDifference}</td>
-//         </tr>
-//       `;
-//   });
-
-//   standingElement.innerHTML = `
-//     <div class="card" style="padding-left: 24px; padding-right: 24px; margin-top: 30px;">
-
-//       <table class="striped responsive-table">
-//         <thead>
-//           <tr>
-//               <th></th>
-//               <th>Team Name</th>
-//               <th>W</th>
-//               <th>D</th>
-//               <th>L</th>
-//               <th>P</th>
-//               <th>GF</th>
-//               <th>GA</th>
-//               <th>GD</th>
-//           </tr>
-//         </thead>
-//         <tbody id="standings">
-//           ${standings}
-//         </tbody>
-//       </table>
-      
-//     </div>
-//   `;
-// }

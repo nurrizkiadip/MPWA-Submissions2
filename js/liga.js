@@ -8,48 +8,11 @@ function init(){
   let page = window.location.hash.substr(1);
 
   // *Calling function
-  loadNav();
   loadFooter();
   loadPage(page);
 
 
   // *Declaration Function
-  function loadNav(){
-    fetch('../navbar.html')
-      .then(function(result){
-        if(result.status !== 200){
-          console.log("Error : " + result.status);
-          return Promise.reject(new Error(result.statusText));
-        } else {
-          return Promise.resolve(result);
-        }
-      })
-      .then(result => result.text())
-      .then(result => {
-        const menus = document.querySelectorAll("nav .topnav, nav .sidenav");
-        menus.forEach(function (menu){
-          menu.innerHTML += result;
-        })
-
-        document.querySelectorAll('nav .topnav a, nav .sidenav a, nav #logo-container')
-          .forEach(function(nav){
-            nav.addEventListener('click', function(e){
-              // Menutup sidebar yg terbuka
-              M.Sidenav.getInstance(document.querySelector('nav .sidenav')).close();
-
-              // mengaktifkan anchor
-              page = e.target.getAttribute('href').substr(1);
-              loadPage(page);
-            })
-          })
-      })
-      .catch(function(error){
-        console.log("Halaman tidak ditemukan");
-        console.log("Pesan Error: " + error);
-      })
-    
-  }
-
   function loadFooter(){
     fetch("../footer.html")
       .then(result => {
@@ -92,7 +55,7 @@ function init(){
   const saveBtn = document.getElementById('save');
   const deleteBtn = document.getElementById('delete');
   let ligas = new URLSearchParams(window.location.search).get("id_liga");
-  console.log(ligas)
+
   if(isFromSaved){
     saveBtn.style.display = 'none';
     deleteBtn.style.display = 'inline-block';

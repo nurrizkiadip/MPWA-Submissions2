@@ -54,23 +54,9 @@ function getAll() {
         .then(function(liga) {
             resolve(liga);
         })
-        .catch(error => console.log(error));
+        .catch(error => reject(error));
     });
 }
-
-// function getAllByTitle(title) {
-//     idxDB
-//     .then(function(db) {
-//         const tx = db.transaction("leagues", "readonly");
-//         const store = tx.objectStore("leagues");
-//         const titleIndex = store.index("post_title");
-//         const range = IDBKeyRange.bound(title, title + "\uffff");
-//         return titleIndex.getAll(range);
-//     })
-//     .then(function(liga) {
-//         console.log(liga);
-//     });
-// }
 
 function getLigaById(id) {
     return new Promise(function(resolve, reject) {

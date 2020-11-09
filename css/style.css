@@ -4,15 +4,37 @@
   box-sizing: border-box;
 }
 
+.title-section{
+  text-align: center;
+  margin: 50px 0 95px;
+
+  position: relative;
+  text-transform: uppercase;
+  font-family: 'Ubuntu', sans-serif;
+  font-weight: 600;
+}
+
 nav{
-  background-color: #393e46;
+  background: linear-gradient(45deg,#585c61, #393e46);
+  z-index: 999;
+}
+
+.sidenav-overlay{
+  z-index: 998;
 }
 
 nav .btn-back{
   margin: 0 20px;
 }
 
-/** HEADER */
+nav .brand-logo{
+  font-family: 'Righteous', cursive;
+}
+
+nav ul a{
+  font-family: 'Quicksand', sans-serif;
+}
+  /** HEADER */
 header{
   position: relative;
   font-family: 'Ubuntu', sans-serif;
@@ -43,31 +65,13 @@ header .caption p{
   font-weight: 100;
 }
 
-header .caption p::after{
-  content: "|";
-  animation: pointer 1s ease-in-out infinite alternate none;
-}
-
-header .caption p span::after{
-  content: "";
-  animation: typing 2s ease-in-out infinite alternate none;
-
-}
-
-@keyframes pointer{
-  0%{
-    content: "|"
-  }
-  50%{
-    content: "";
-  }
-}
 
 /** AKHIR HEADER */
 
 /** MAIN */
 #body-content{
   min-height: 100vh;
+  position: relative;
 }
 
 
@@ -80,7 +84,7 @@ header .caption p span::after{
 .blogs .blog{
   min-height: 450px;
   max-height: 480px;
-  margin: 30px 60px;
+  margin: 20px 60px;
   box-shadow: 0 0 10px 0px rgba(0, 0, 0, .5);
   
   position: relative;
@@ -106,7 +110,7 @@ header .caption p span::after{
   display: flex;
   justify-content: space-between;
 
-  background-color: #333333cb;
+  background-color: #00adb5cd;
   position: absolute;
   left: 0;
   bottom: -30px;
@@ -123,7 +127,7 @@ header .caption p span::after{
   position: absolute;
   display: flex;
   flex-direction: column;
-  bottom: 17px;
+  bottom: 40px;
   right: 50px;
   
   transition: .25s linear;
@@ -189,7 +193,10 @@ header .caption p span::after{
 
 .about-content .about-desc p{
   text-align: justify;
-  line-height: 1.2rem;
+  line-height: 1.75vw;
+  font-size: 1.1vw;
+  font-family: 'Quicksand', sans-serif;
+
 }
 /** AKHIR ABOUT */
 
@@ -208,7 +215,65 @@ footer .footer-content{
   background-color: #15191e !important;
 }
 
+.footer-content .newsletter form{
+  margin: 20px 0;
+  display: flex;
+}
+
+.footer-content .newsletter form input{
+  color: #ddd;
+  margin-right: 20px;
+  height: 40px;
+  width: 300px;
+}
+
+.footer-content .newsletter form input::placeholder{
+  color: #aaa;
+}
+
+.footer-content .newsletter button{
+  height: 40px;
+  width: 45px;
+  color: white;
+  outline: none;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background: transparent;
+
+  cursor: pointer;
+
+  transition: .2s linear;
+}
+
+.footer-content .newsletter button:hover{
+  background: #ddd;
+  color: black;
+}
+
 /** AKHIR FOOTER */
+
+@media screen and (max-width: 1024px){
+  header .caption h1{
+    font-size: 7vh;
+  }
+  header .caption p{
+    font-size: 2.4vh;
+  }
+
+  .blogs .blog{
+    min-height: 250px;
+  }
+
+  .about-content .about-desc p{
+    margin: 30px 0;
+    line-height: 3vh;
+    font-size: 1.8vh;
+  }
+
+  .blogs .blog{
+    margin: 20px 30px;
+  }
+}
 
 @media screen and (max-width: 600px){
   header .caption h1{
@@ -220,5 +285,17 @@ footer .footer-content{
 
   .blogs .blog{
     min-height: 300px;
+  }
+
+  .about-content .about-img img{
+    width: 70%;
+    margin: 0 45px;
+  }
+  
+
+  .about-content .about-desc p{
+    margin: 30px 0;
+    line-height: 3vh;
+    font-size: 1.8vh;
   }
 }

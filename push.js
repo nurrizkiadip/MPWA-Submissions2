@@ -1,8 +1,8 @@
 const webPush = require('web-push');
 
 const vapidKeys = {
-   "publicKey": "BHKxgJaZnFQfNyuUM3YjdLPgO8DL-n9BlciqOKEvqMVersMYAA0u7b6qKHTD7OBKkdTHeZmPcDAUIkjO8f_Le_M",
-   "privateKey": "dvVhAfYkLiC8sagrXYrXh5c6iJLiqBc28HNLvsfYULI"
+   "publicKey": "BOKUf6kzWPzkVBx8xzkcsNc85ca1-evK-3TM5KiHGBHORKGLTW_teIJ20htTRTFRgPYUQLn1F8Lp033bOHp_Kuk",
+   "privateKey": "84-HEO3JPUOix3F6DWTqV4aidmVaOkAik-Bl527J4iM"
 };
  
  
@@ -12,17 +12,17 @@ webPush.setVapidDetails(
    vapidKeys.privateKey
 )
 const pushSubscription = {
-   "endpoint": "https://fcm.googleapis.com/fcm/send/dfP2aaKdaig:APA91bGY-hApdpR3LS3oWbKgF3ZDVOnF48NlWhLa-d7aoy3Gj3FUJVlb69LlPH6AD221_aeMFWJORAFAVC8SGyA8aGA8sjSnsG2BToJBYHtvUfzD6M8qwzcdYb-CnxIu6VyIoOQZqj_Z",
+   "endpoint": "https://fcm.googleapis.com/fcm/send/ckJjBqcy_20:APA91bGNDn9Bf6B916jXHb3x05ZYqo7ybKfoSAFwF7zyoHihXDs7JNIMoRNQuPntnigKmqmQoZi9xCDXLQButcMOa-tbXgrqwsxFhlbxBXjDeHalAOeULiWIpAfK_2vDcdQvy-6pZYfE",
    "keys": {
-       "p256dh": "BNNSd2SN1vw1I4qqBjg7jiOahxXN2xS9ZaNTrm+vsxN9WmGFIRgSz6n2AlxPLVaiXYx7lefZTrBRJqS/0zi6AgY=",
-       "auth": "yUbBByQJahz+DxExi43H7g=="
+       "p256dh": "BKF/DwaeV1oV+7hBCCxZmILlEM/gKsL1y3hufzp3fWyvebIL3V6Fpx+9a+5btDg4CFnSfuQ41vw4vTF7L2xPTaI=",
+       "auth": "KLdx1QDO9JPup4mshKKC3A=="
    }
 };
 
-const payload = 'Selamat! Aplikasi Anda sudah dapat menerima push notifikasi!';
+const payload = 'Selamat datang di Kabar Liga Bola! Aplikasi yang menyediakan berbagai informasi mengenai liga sepak bola. Salam sejahtera';
  
 const options = {
-   gcmAPIKey: '111070664979',
+   gcmAPIKey: '327390441337',
    TTL: 60
 };
 webPush.sendNotification(

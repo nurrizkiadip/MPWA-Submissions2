@@ -32,7 +32,7 @@ function requestPermission() {
         navigator.serviceWorker.getRegistration().then(function(registration) {
           registration.pushManager.subscribe({
             userVisibleOnly: true,
-            applicationServerKey: urlBase64ToUint8Array("BHKxgJaZnFQfNyuUM3YjdLPgO8DL-n9BlciqOKEvqMVersMYAA0u7b6qKHTD7OBKkdTHeZmPcDAUIkjO8f_Le_M")
+            applicationServerKey: urlBase64ToUint8Array("BOKUf6kzWPzkVBx8xzkcsNc85ca1-evK-3TM5KiHGBHORKGLTW_teIJ20htTRTFRgPYUQLn1F8Lp033bOHp_Kuk")
           }).then(function(subscribe) {
             
             console.log('Berhasil melakukan subscribe dengan endpoint: ', subscribe.endpoint);
@@ -61,7 +61,6 @@ function urlBase64ToUint8Array(base64String) {
   }
   return outputArray;
 }
-
 
 //*Event Listener
 document.addEventListener('DOMContentLoaded', init);
@@ -160,19 +159,6 @@ function init(){
         .then(result => result.text())
         .then(result => {
           header.innerHTML = result;
-
-          const textCaption = header.getElementsByTagName('p')[0];
-          const huruf = [...textCaption.textContent].map(h => `<span>${h}</span>`).join('');
-          textCaption.innerHTML = huruf;
-
-          // const textAnim = Array.from(header.getElementsByTagName('span'));
-          // const lengthText = textAnim.length;
-
-          // textAnim.forEach(function(char, i){
-          //   setInterval(function(){
-
-          //   })
-          // })
       })
       .catch(error => console.log("Error : " + error))
     
@@ -204,23 +190,11 @@ function init(){
             getAllPosterTeam(2021);
             getAllPosterTeam(2015);
             getAllPosterTeam(2014);
-          } else if(page =='saved'){
-            getSavedLiga()
-            // .then(function(result){
-              
-
-            // })
-            // .catch(error => console.log(error));
-
+          } else if(page == 'saved'){
+            getSavedLiga();
           }
 
         })
         .catch(error => console.log("Error : " + error))
   }
-
-  //* Active Menu
-
-  
-
-  
 }
