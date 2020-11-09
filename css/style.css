@@ -82,8 +82,7 @@ header .caption p{
   margin: auto !important;
 }
 .blogs .blog{
-  min-height: 450px;
-  max-height: 480px;
+  height: 500px;
   margin: 20px 60px;
   box-shadow: 0 0 10px 0px rgba(0, 0, 0, .5);
   
@@ -95,10 +94,12 @@ header .caption p{
 .blogs .blog-image{
   display: flex;
   flex-wrap: wrap;
+  line-height: 500px;
 }
 
 .blogs .blog-image img{
-  width: 20%;
+  width: 80%;
+  margin: auto;
   
 }
 
@@ -251,6 +252,42 @@ footer .footer-content{
 }
 
 /** AKHIR FOOTER */
+
+
+/* NOTIF SAVED */
+#notif-saved{
+  padding: 10px 25px;
+  border-radius: 25px;
+  opacity: 0;
+  position: fixed;
+  left: 50%;
+  bottom: 100px;
+  transform: translateX(-50%);
+  background-color: #444;
+  color: white;
+  pointer-events: none;
+  user-select: none;
+}
+#notif-saved p{
+  display: none;
+}
+
+@keyframes fadeInOut{
+  0%{
+    opacity: 0;
+  }
+  25%{
+    opacity: .85;
+  }
+  50%{
+    opacity: .85;
+  }
+  100%{
+    opacity: 0;
+  }
+
+}
+
 
 @media screen and (max-width: 1024px){
   header .caption h1{

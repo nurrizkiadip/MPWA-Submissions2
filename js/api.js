@@ -54,24 +54,24 @@ function getAllPosterTeam(id_liga) {
         })
       }
     })
-  } 
-
-  
+  }
 }
 
 function showBlogs(data){
-  let logo = '';
-  let gambar = '';
+  function gambarLiga(){
+    const liga = data.competition.area.name;
+    if(liga === "England") return "liga-inggris"
+    else if(liga === "France") return "liga-prancis"
+    else if(liga === "Spain") return"liga-spanyol"
+    else if(liga === "Netherlands") return"liga-belanda"
+    else if(liga === "Germany") return"liga-jerman"
+    else if(liga === "Europe") return"liga-eropa"
+  }
 
-  data.standings[0].table.forEach(function(tab){
-    gambar += `
-      <img src="${tab.team.crestUrl.replace(/^http:\/\//i, 'https://')}" alt="Gambar Logo Team">
-    `;
-  })
-  logo = `
+  const logo = `
     <div class="blog col l5 s12">
       <div class="blog-image">
-          ${gambar}
+        <img src="./assets/img/liga/${gambarLiga()}.jpg" alt="Gambar Logo Team">
       </div>
       <div class="blog-desc">
         <div class="row">
@@ -120,6 +120,16 @@ function getTeams() {
               }
             });
           });
+        } else {
+          fetchAPI(ENDPOINT_COMPETITION(idParam))
+          .then(data => {
+            fetchAPI(ENDPOINT_TEAMS(data.competition.id))
+            .then(dataTeams => {
+              showTeams(dataTeams);
+    
+              resolve(dataTeams);
+            })
+          });
         }
       });
     }
@@ -133,7 +143,6 @@ function showTeams(dataTeams) {
   dataTeams.teams.forEach(function (team) {
       standings += `
         <tr>
-          <td><img src="${team.crestUrl}" width="30px" alt="badge"/></td>
           <td>${team.name} (${team.shortName})</td>
           <td>${team.clubColors}</td>
           <td>${team.address}</td>
@@ -153,7 +162,6 @@ function showTeams(dataTeams) {
       <table class="striped responsive-table">
         <thead>
           <tr>
-              <th style="height:65px">Logo</th>
               <th>Nama Tim</th>
               <th>Warna Kostum</th>
               <th>Alamat</th>
@@ -177,7 +185,6 @@ function getSavedLiga() {
   return new Promise(function(resolve, reject){
     getAll().then(function(ligas) {
       const savedPage = document.querySelector("#body-content .blogs")
-  
       // Menyusun komponen card artikel secara dinamis
       let ligaCard = "";
       ligas.forEach(function(liga) {

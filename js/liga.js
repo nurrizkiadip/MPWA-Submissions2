@@ -54,6 +54,7 @@ function init(){
   const isFromSaved = new URLSearchParams(window.location.search).get("saved");
   const saveBtn = document.getElementById('save');
   const deleteBtn = document.getElementById('delete');
+  const notifSaved = document.getElementById('notif-saved');
   let ligas = new URLSearchParams(window.location.search).get("id_liga");
 
   if(isFromSaved){
@@ -67,11 +68,15 @@ function init(){
 
   saveBtn.addEventListener('click', function(){
     ligas.then(teams => saveFavLiga(teams))
+    notifSaved.style.animation = 'fadeInOut 3.7s linear 0s forwards 1';
+    notifSaved.querySelector('.text-simpan').style.display = 'block';
     window.location.href = "./index.html#saved";
   })
 
   deleteBtn.addEventListener('click', function(){
-    deleteFavLiga(parseInt(ligas)).then(_ => getSavedLiga());
+    deleteFavLiga(parseInt(ligas)).then(() => getSavedLiga());
+    notifSaved.style.animation = 'fadeInOut 3.7s linear 0s forwards 1';
+    notifSaved.querySelector('.text-hapus').style.display = 'block';
     window.location.href = "./index.html#saved";
   })
 }

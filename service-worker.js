@@ -1,4 +1,4 @@
-const CACHE_NAME = "kabarliga-v5";
+const CACHE_NAME = "kabarliga-v1";
 
 const urlsToCache = [
   "/",
@@ -31,29 +31,24 @@ const urlsToCache = [
   "/assets/iconx/favicon-32x32.png",
   "/assets/iconx/favicon.ico",
   "/assets/img/bg-jumbotron.jpg",
+  "/assets/img/liga/liga-belanda.jpg",
+  "/assets/img/liga/liga-spanyol.jpg",
+  "/assets/img/liga/liga-jerman.jpg",
+  "/assets/img/liga/liga-inggris.jpg",
+  "/assets/img/liga/liga-eropa.jpg",
+  "/assets/img/liga/liga-prancis.jpg",
 
   "https://fonts.googleapis.com/icon?family=Material+Icons",
   "https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap",
   "https://fonts.gstatic.com/s/ubuntu/v15/4iCv6KVjbNBYlgoCxCvjsGyN.woff2",
+  "https://fonts.gstatic.com/s/ubuntu/v15/4iCv6KVjbNBYlgoC1CzjsGyN.woff2",
   "https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap",
   "https://fonts.googleapis.com/css2?family=Righteous&display=swap",
+
   "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css",
   "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/webfonts/fa-solid-900.woff2",
   "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/webfonts/fa-solid-900.woff",
   "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/webfonts/fa-solid-900.ttf",
-
-  "https://api.football-data.org/v2/competitions/2001/teams",
-
-  "https://api.football-data.org/v2/competitions/2002/teams",
-
-  "https://api.football-data.org/v2/competitions/2003/teams",
-
-  "https://api.football-data.org/v2/competitions/2015/teams",
-
-  "https://api.football-data.org/v2/competitions/2014/teams",
-
-  "https://api.football-data.org/v2/competitions/2021/teams",
-
 ];
 
 self.addEventListener("install", function (event) {
