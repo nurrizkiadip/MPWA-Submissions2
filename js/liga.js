@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', init);
 //* Function
 function init(){
   M.Sidenav.init(document.querySelectorAll('nav .sidenav'));
-
   let page = window.location.hash.substr(1);
 
   // *Calling function

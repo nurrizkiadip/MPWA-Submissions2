@@ -90,6 +90,25 @@ workbox.routing.registerRoute(
 )
 
 
+//Menyimpan font awesome CDN
+workbox.routing.registerRoute(
+  new RegExp("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/"),
+  workbox.strategies.staleWhileRevalidate({
+    cacheName: 'font-awesome',
+    plugins: [
+      new workbox.cacheableResponse.Plugin({
+        statuses: [200],
+      }),
+      new workbox.expiration.Plugin({
+        maxAgeSeconds: 60 * 60 * 24 * 365,
+        maxEntries: 60,
+      })
+
+    ]
+  })
+)
+
+
 
 // Menyimpan cache dari CSS Google Fonts
 workbox.routing.registerRoute(

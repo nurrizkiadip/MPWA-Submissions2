@@ -186,22 +186,24 @@ function showTeams(dataTeams) {
 function getSavedLiga() {
   return new Promise(function(resolve, reject){
     getAll().then(function(ligas) {
+      function gambarLiga(liga){
+        if(liga === "England") return "liga-inggris"
+        else if(liga === "France") return "liga-prancis"
+        else if(liga === "Spain") return"liga-spanyol"
+        else if(liga === "Netherlands") return"liga-belanda"
+        else if(liga === "Germany") return"liga-jerman"
+        else if(liga === "Europe") return"liga-eropa"
+      }
+
       const savedPage = document.querySelector("#body-content .blogs")
       // Menyusun komponen card artikel secara dinamis
       let ligaCard = "";
       ligas.forEach(function(liga) {
-        let gambar = '';
-  
-        liga.teams.forEach(function(team){
-          gambar += `
-            <img src="${team.crestUrl}" alt="Gambar Logo Team">
-          `
-        })
-      
+        
         ligaCard += `
           <div class="blog col l5 s12">
             <div class="blog-image">
-                ${gambar}
+              <img src="./assets/img/liga/${gambarLiga(liga.name)}.jpg" alt="Gambar Logo Team">
             </div>
             <div class="blog-desc">
               <div class="row">
