@@ -20,7 +20,7 @@ nav{
 }
 
 .sidenav-overlay{
-  z-index: 998;
+  z-index: 10;
 }
 
 nav .btn-back{

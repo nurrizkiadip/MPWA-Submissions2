@@ -17,7 +17,7 @@ function saveFavLiga(teams) {
             lastUpdated: teams.competition.lastUpdated,
             teams: teams.teams
         }
-        tx.objectStore("leagues").add(item);
+        tx.objectStore("leagues").put(item);
         return tx.complete;
     })
     .then(function() {

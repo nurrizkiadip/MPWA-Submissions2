@@ -31,6 +31,7 @@ const urlsToCache = [
   "/assets/iconx/favicon-32x32.png",
   "/assets/iconx/favicon.ico",
   "/assets/img/bg-jumbotron.jpg",
+  "/assets/img/about-edited.jpg",
   "/assets/img/liga/liga-belanda.jpg",
   "/assets/img/liga/liga-spanyol.jpg",
   "/assets/img/liga/liga-jerman.jpg",
@@ -39,11 +40,11 @@ const urlsToCache = [
   "/assets/img/liga/liga-prancis.jpg",
 
   "https://fonts.googleapis.com/icon?family=Material+Icons",
-  "https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap",
-  "https://fonts.gstatic.com/s/ubuntu/v15/4iCv6KVjbNBYlgoCxCvjsGyN.woff2",
-  "https://fonts.gstatic.com/s/ubuntu/v15/4iCv6KVjbNBYlgoC1CzjsGyN.woff2",
   "https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap",
   "https://fonts.googleapis.com/css2?family=Righteous&display=swap",
+
+  "https://fonts.gstatic.com/s/materialicons/v67/flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.woff2",
+  "https://fonts.gstatic.com/s/quicksand/v21/6xKtdSZaM9iE8KbpRA_hK1QN.woff2",
 
   "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css",
   "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/webfonts/fa-solid-900.woff2",
