@@ -143,6 +143,7 @@ function showTeams(dataTeams) {
   dataTeams.teams.forEach(function (team) {
       standings += `
         <tr>
+          <td><img src="${team.crestUrl}" style="margin: 6px" width="40px" alt="Logo Tim" /></td>
           <td>${team.name} (${team.shortName})</td>
           <td>${team.clubColors}</td>
           <td>${team.address}</td>
@@ -162,6 +163,7 @@ function showTeams(dataTeams) {
       <table class="striped responsive-table">
         <thead>
           <tr>
+              <th>Logo</th>
               <th>Nama Tim</th>
               <th>Warna Kostum</th>
               <th>Alamat</th>
@@ -228,8 +230,8 @@ function getSavedLiga() {
 }
 
 function getSavedLigaById() {
-  var urlParams = new URLSearchParams(window.location.search);
-  var idParam = urlParams.get("id_liga"); //typedata string
+  const urlParams = new URLSearchParams(window.location.search);
+  const idParam = urlParams.get("id_liga"); //typedata string
   let ligaDetails = '';
 
   // idParam must convert to number before using it bcs of the DB 

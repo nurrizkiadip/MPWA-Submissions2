@@ -1,4 +1,4 @@
-const CACHE_NAME = "kabarliga-v1";
+const CACHE_NAME = "kabarliga-v2";
 
 const urlsToCache = [
   "/",
@@ -43,8 +43,10 @@ const urlsToCache = [
   "https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap",
   "https://fonts.googleapis.com/css2?family=Righteous&display=swap",
 
-  "https://fonts.gstatic.com/s/materialicons/v67/flUhRq6tzZclQEJ-Vdg-IuiaDsNcIhQ8tQ.woff2",
+  "https://fonts.gstatic.com/s/materialicons/v67/flUhRq6tzZclQEJ-Vdg-IuiaDsNc.woff2",
   "https://fonts.gstatic.com/s/quicksand/v21/6xKtdSZaM9iE8KbpRA_hK1QN.woff2",
+  "https://fonts.gstatic.com/s/righteous/v9/1cXxaUPXBpj2rGoU7C9WhnGFucE.woff2",
+  "https://fonts.gstatic.com/s/righteous/v9/1cXxaUPXBpj2rGoU7C9WiHGF.woff2",
 
   "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css",
   "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/webfonts/fa-solid-900.woff2",

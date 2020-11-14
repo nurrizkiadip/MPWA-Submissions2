@@ -7,7 +7,7 @@ if (!('serviceWorker' in navigator)) {
 
 //* Daftar Service Worker
 function registerServiceWorker() {
-  return navigator.serviceWorker.register('../service-worker.js')
+  return navigator.serviceWorker.register('../sw.js')
     .then(function (registration) {
       console.log('Registrasi service worker berhasil.');
       return registration;
